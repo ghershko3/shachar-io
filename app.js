@@ -1,7 +1,8 @@
 const { Telegraf } = require('telegraf')
 const express = require('express')
+var nodemailer = require('nodemailer')
 
-const bot = new Telegraf(process.env.SHACHAR_IO_SECRET)
+const bot = new Telegraf(process.env.SHACHAR_IO_TELEGRAM_SECRET)
 const app = express()
 
 const sentences = [
@@ -13,7 +14,7 @@ const sentences = [
     'ליקווידבייס'
 ]
 
-bot.start((ctx) => ctx.reply('אפשר לבקש משחר להגיד משהו. פשוט אומרים "שחר תגידי משהו".'))
+bot.start((ctx) => ctx.reply('אפשר לבקש משחר להגיד משהו. פשוט מבקשים ממנה "שחר תגידי משהו".'))
 bot.help((ctx) => ctx.reply('בשביל לבקש משחר להגיד משהו, מבקשים ממנה - "שחר תגידי משהו"'))
 
 bot.on('sticker', (ctx) => ctx.reply('אדיר אדיר אדיר'))
@@ -21,6 +22,33 @@ bot.on('sticker', (ctx) => ctx.reply('אדיר אדיר אדיר'))
 bot.hears('שחר תגידי משהו', (ctx) => {
     const rand = Math.floor(Math.random() * sentences.length)
     return ctx.reply(sentences[rand])
+})
+
+bot.hears('שחר תגידי משהו', (ctx) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'shachariobot@gmail.com',
+            pass: process.env.SHACHAR_IO_MAIL_PASS
+        }
+    });
+
+    var mailOptions = {
+        from: 'shachariobot@gmail.com',
+        to: 'ghershko3@gmail.com',
+        subject: 'יש לי פיפי',
+        html: "<h1>יש לי פיפי</h1><br/>בברכה, <br/> שחר",
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
+    return ctx.reply('נשלח מייל לעידו, תודה')
 })
 
 bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
