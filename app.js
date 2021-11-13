@@ -1,23 +1,30 @@
 const { Telegraf } = require('telegraf')
 const express = require('express')
 
-const bot = new Telegraf('2104309510:AAFMeJzTIyIseGLSAPtjetZ_8-U_ofBb10E')
+const bot = new Telegraf(process.env.SHACHAR_IO_SECRET)
 const app = express()
 
 const sentences = [
     'אני רעב',
     'המבונגר',
-    'ארטשולר'
+    'ארטשולר',
+    'שוויץ קייס',
+    'שסנים לדיבי',
+    'ליקווידבייס'
 ]
 
-bot.start((ctx) => ctx.reply('Welcome'))
-bot.help((ctx) => ctx.reply('Send me a sticker'))
-bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.start((ctx) => ctx.reply('אפשר לבקש משחר להגיד משהו. פשוט אומרים "שחר תגידי משהו".'))
+bot.help((ctx) => ctx.reply('בשביל לבקש משחר להגיד משהו, מבקשים ממנה - "שחר תגידי משהו"'))
+
+bot.on('sticker', (ctx) => ctx.reply('אדיר אדיר אדיר'))
 
 bot.hears('שחר תגידי משהו', (ctx) => {
     const rand = Math.floor(Math.random() * sentences.length)
     return ctx.reply(sentences[rand])
 })
+
+bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
+
 bot.launch()
 
 // Enable graceful stop
