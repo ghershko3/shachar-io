@@ -30,3 +30,5 @@ app.get('/', function (req, res) {
         "<h1>Hello There! You found <a href='t.me/ShacharSentencesBot'>shachar-io</a> backend</h1>"
     )
 })
+
+app.listen(process.env.PORT || 3000, () => console.log('Server is running...'))
