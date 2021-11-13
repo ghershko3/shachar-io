@@ -1,6 +1,8 @@
 const { Telegraf } = require('telegraf')
+const express = require('express')
 
 const bot = new Telegraf('2104309510:AAFMeJzTIyIseGLSAPtjetZ_8-U_ofBb10E')
+const app = express()
 
 const sentences = [
     'אני רעב',
@@ -21,3 +23,10 @@ bot.launch()
 // Enable graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
+
+app.use(express.static('public'))
+app.get('/', function (req, res) {
+    res.send(
+        "<h1>Hello There! You found <a href='t.me/ShacharSentencesBot'>shachar-io</a> backend</h1>"
+    )
+})
