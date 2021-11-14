@@ -38,13 +38,13 @@ bot.hears('שחר תגידי משהו', (ctx) => {
 bot.hears('יש לי פיפי', async (ctx) => {
     client.messages
         .create({
-            body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+            body: 'יש לי פיפי. שחר.',
             from: '+14793093291',
-            to: '+972546933022'
+            to: '+972546419199'
         })
         .then(message => console.log(message.sid));
 
-    return ctx.reply('בעתיד נשלח לעידו הודעה')
+    return ctx.reply('נשלח לעידו SMS, אפשר ללכת לשירותים בבטחה')
 })
 
 bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
