@@ -24,7 +24,7 @@ bot.hears('שחר תגידי משהו', (ctx) => {
     return ctx.reply(sentences[rand])
 })
 
-bot.hears('שחר תגידי משהו', (ctx) => {
+bot.hears('שחר תגידי משהו', async (ctx) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -40,7 +40,7 @@ bot.hears('שחר תגידי משהו', (ctx) => {
         html: "<h1>יש לי פיפי</h1><br/>בברכה, <br/> שחר",
     };
 
-    transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 
     return ctx.reply('נשלח מייל לעידו, תודה')
 })
