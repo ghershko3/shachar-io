@@ -40,13 +40,7 @@ bot.hears('שחר תגידי משהו', (ctx) => {
         html: "<h1>יש לי פיפי</h1><br/>בברכה, <br/> שחר",
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+    transporter.sendMail(mailOptions);
 
     return ctx.reply('נשלח מייל לעידו, תודה')
 })
