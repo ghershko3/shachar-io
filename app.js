@@ -1,18 +1,12 @@
 const { Telegraf } = require('telegraf')
 const express = require('express')
-var nodemailer = require('nodemailer')
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 const bot = new Telegraf(process.env.SHACHAR_IO_TELEGRAM_SECRET)
 const app = express()
-
-const sentences = [
-    'אני רעב',
-    'המבונגר',
-    'ארטשולר',
-    'שוויץ קייס',
-    'שסנים לדיבי',
-    'ליקווידבייס'
-]
 
 bot.start((ctx) => ctx.reply('אפשר לבקש משחר להגיד משהו. פשוט מבקשים ממנה "שחר תגידי משהו".'))
 bot.help((ctx) => ctx.reply('בשביל לבקש משחר להגיד משהו, מבקשים ממנה - "שחר תגידי משהו"'))
@@ -20,15 +14,42 @@ bot.help((ctx) => ctx.reply('בשביל לבקש משחר להגיד משהו, �
 bot.on('sticker', (ctx) => ctx.reply('אדיר אדיר אדיר'))
 
 bot.hears('שחר תגידי משהו', (ctx) => {
+    const sentences = [
+        'אני רעב',
+        'המבונגר',
+        `ארצ'ולר`,
+        'שוויץ קייס',
+        'שסנים לדיבי',
+        'ליקווידבייס',
+        'קומפלנקס',
+        'דורדורנט',
+        'פוקפורן',
+        'שן חותכנית',
+        'אתיופנית',
+        'בלייבלייד',
+        'שוסי'
+
+    ]
+
     const rand = Math.floor(Math.random() * sentences.length)
     return ctx.reply(sentences[rand])
 })
 
 bot.hears('יש לי פיפי', async (ctx) => {
+    client.messages
+        .create({
+            body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+            from: '+14793093291',
+            to: '+972546933022'
+        })
+        .then(message => console.log(message.sid));
+
     return ctx.reply('בעתיד נשלח לעידו הודעה')
 })
 
 bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
+
+bot.hears('צילה הבת זונה', (ctx) => ctx.reply('נכון'))
 
 bot.launch()
 
