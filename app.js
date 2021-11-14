@@ -25,24 +25,7 @@ bot.hears('שחר תגידי משהו', (ctx) => {
 })
 
 bot.hears('יש לי פיפי', async (ctx) => {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'shachariobot@gmail.com',
-            pass: process.env.SHACHAR_IO_MAIL_PASS
-        }
-    });
-
-    var mailOptions = {
-        from: 'shachariobot@gmail.com',
-        to: 'ghershko3@gmail.com',
-        subject: 'יש לי פיפי',
-        html: "<h1>יש לי פיפי</h1><br/>בברכה, <br/> שחר",
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    return ctx.reply('נשלח מייל לעידו, תודה')
+    return ctx.reply('בעתיד נשלח לעידו הודעה')
 })
 
 bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
