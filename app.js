@@ -38,16 +38,22 @@ bot.hears('שחר תגידי משהו', (ctx) => {
 })
 
 bot.hears('יש לי פיפי', async (ctx) => {
-    client.messages
-        .create({
-            body: 'יש לי פיפי. שחר-איי-או.',
-            from: '+14793093291',
-            to: '+972546419199'
-        })
-        .then(message => console.log(message.sid));
+    const isMessegeActive = process.env.IS_MESSAGE_TO_IDO_ACTIVE || true
+
+    if (isMessegeActive) {
+        client.messages
+            .create({
+                body: 'יש לי פיפי. שחר-איי-או.',
+                from: '+14793093291',
+                to: '+972546419199'
+            })
+            .then(message => console.log(message.sid));
+    }
 
     return ctx.reply('נשלח לעידו SMS, אפשר ללכת לשירותים בבטחה')
 })
+
+// bot.hears('hi', Stage.enter('PIPI'));
 
 bot.hears('דניאל תגיד משהו', (ctx) => ctx.reply('ח-ז-ק'))
 
