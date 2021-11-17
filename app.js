@@ -43,9 +43,9 @@ bot.hears('שחר תגידי משהו', (ctx) => {
 bot.hears('יש לי פיפי', async (ctx) => {
     client.messages
         .create({
-            body: 'יש לי פיפי. שחר.',
-            from: 'whatsapp:+14793093291',
-            to: 'whatsapp:+972546933022'
+            body: 'יש לי פיפי. שחר-איי-או.',
+            from: '+14793093291',
+            to: '+972546933022'
         })
         .then(message => console.log(message.sid));
 
