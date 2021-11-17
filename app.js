@@ -31,7 +31,6 @@ bot.hears('שחר תגידי משהו', (ctx) => {
         'אתיופנית',
         'בלייבלייד',
         'שוסי'
-
     ]
 
     const rand = Math.floor(Math.random() * sentences.length)
@@ -43,7 +42,7 @@ bot.hears('יש לי פיפי', async (ctx) => {
         .create({
             body: 'יש לי פיפי. שחר-איי-או.',
             from: '+14793093291',
-            to: '+972546933022'
+            to: '+972546419199'
         })
         .then(message => console.log(message.sid));
 
