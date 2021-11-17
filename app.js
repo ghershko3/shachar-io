@@ -1,9 +1,7 @@
 const { Telegraf } = require('telegraf')
 const express = require('express')
-const client = require('twilio')(accountSid, authToken);
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 const bot = new Telegraf(process.env.SHACHAR_IO_TELEGRAM_SECRET)
 const app = express()
