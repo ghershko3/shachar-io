@@ -1,15 +1,20 @@
 const { Telegraf } = require('telegraf')
 const express = require('express')
+const client = require('twilio')(accountSid, authToken);
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = require('twilio')(accountSid, authToken);
 
 const bot = new Telegraf(process.env.SHACHAR_IO_TELEGRAM_SECRET)
 const app = express()
 
 bot.start((ctx) => ctx.reply('אפשר לבקש משחר להגיד משהו. פשוט מבקשים ממנה "שחר תגידי משהו".'))
-bot.help((ctx) => ctx.reply('בשביל לבקש משחר להגיד משהו, מבקשים ממנה - "שחר תגידי משהו"'))
+bot.help((ctx) => ctx.reply(`
+ שחר תגידי משהו \n
+ יש לי פיפי \n
+ דניאל תגיד משהו \n
+ צילה הבת זונה \n
+`))
 
 bot.on('sticker', (ctx) => ctx.reply('אדיר אדיר אדיר'))
 
@@ -39,8 +44,8 @@ bot.hears('יש לי פיפי', async (ctx) => {
     client.messages
         .create({
             body: 'יש לי פיפי. שחר.',
-            from: '+14793093291',
-            to: '+972546419199'
+            from: 'whatsapp:+14793093291',
+            to: 'whatsapp:+972546933022'
         })
         .then(message => console.log(message.sid));
 
